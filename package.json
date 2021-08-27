@@ -19,7 +19,7 @@
     "wechat",
     "miniapp"
   ],
-  "icon": "./src/static/wechat.png",
+  "icon": "src/static/wechat.png",
   "activationEvents": [
     "onCommand:createPage",
     "onCommand:createComponent"

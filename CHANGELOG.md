@@ -1,9 +1,8 @@
 # Change Log
 
-All notable changes to the "wechat-miniapp-create" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [0.1.0]
 
-- Initial release
+- 第一个版本，目前只有快速新建`page`和`component`文件结构的功能
+

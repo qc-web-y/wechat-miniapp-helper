@@ -1,40 +1,123 @@
 {
-	"name": "wechat-miniapp-create",
-	"displayName": "wechat-miniapp-create",
-	"description": "",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.59.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:wechat-miniapp-create.helloWorld"
-	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "wechat-miniapp-create.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.59.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.2.2",
-		"@types/node": "14.x",
-		"eslint": "^7.27.0",
-		"glob": "^7.1.7",
-		"mocha": "^8.4.0",
-		"typescript": "^4.3.2",
-		"vscode-test": "^1.5.2"
-	}
+  "name": "wechat-miniapp-helper",
+  "displayName": "微信小程序助手",
+  "description": "快速创建page和component文件结构",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.59.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "whosydd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whosydd/wechat-miniapp-helper.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "wechat",
+    "miniapp"
+  ],
+  "icon": "./src/static/wechat.png",
+  "activationEvents": [
+    "onCommand:createPage",
+    "onCommand:createComponent"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "createPage",
+        "title": "WeChat：新建 Page"
+      },
+      {
+        "command": "createComponent",
+        "title": "WeChat：新建 Component"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "createPage",
+          "group": "1_navigation@1",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "createComponent",
+          "group": "1_navigation@2",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "configuration": [
+      {
+        "title": "useGist",
+        "properties": {
+          "wechat-miniapp-create.PageGist": {
+            "type": "object",
+            "default": {
+              "wxml": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "wxss": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "json": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "js": {
+                "fileName": "",
+                "gistID": ""
+              }
+            }
+          },
+          "wechat-miniapp-create.ComponentGist": {
+            "type": "object",
+            "default": {
+              "wxml": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "wxss": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "json": {
+                "fileName": "",
+                "gistID": ""
+              },
+              "js": {
+                "fileName": "",
+                "gistID": ""
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.59.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "mocha": "^8.4.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }

@@ -1,65 +1,57 @@
-# wechat-miniapp-create README
-
-This is the README for your extension "wechat-miniapp-create". After writing up a brief description, we recommend including the following sections.
+# 微信小程序助手
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 目前只有一个功能，快速新建`page`和`component`文件结构，自动追加`page`路径到`app.json`
 
-For example if there is an image subfolder under your extension project workspace:
+> 后续**也许**会添加其他功能
 
-\!\[feature X\]\(images/feature-x.png\)
+## Usage
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+右键点击**文件夹**或者**空白处**才会出现`WeChat: 新建 Page`和`WeChat: 新建 Component`选项
 
-## Requirements
+![Capture](https://raw.githubusercontent.com/whosydd/images-in-one/main/202108280127446.PNG)
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+> 如果通过命令使用该扩展，那么默认会在项目根目录创建文件夹
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### wechat-miniapp-create.PageGist
 
-For example:
+在`settings`添加该配置后，可以通过在[Gist](https://gist.github.com/)上添加自定义的文件模板，通过`ajax`获取到本地
 
-This extension contributes the following settings:
+注意：`filename`必须包含后缀
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+> 另外你可以在浏览器地址栏得到`gistID`
+>
+> https://gist.github.com/whosydd/037f52d91c0dcd5a8d81d68c2fb3c754 <-- 后面这一长串数字就是`gistID`
 
-## Known Issues
+```json
+"wechat-miniapp-create.PageGist": {
+    "wxml": {
+      "fileName": "test.wxml",
+      "gistID": "79f6deafa782a06739d96a01b047479a"
+    },
+    "wxss": {
+      "fileName": "",
+      "gistID": ""
+    },
+    "json": {
+      "fileName": "",
+      "gistID": ""
+    },
+    "js": {
+      "fileName": "",
+      "gistID": ""
+    }
+  },
+```
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### wechat-miniapp-create.ComponentGist
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+配置同上
 
 -----------------------------------------------------------------------------------------------------------
 
-## Working with Markdown
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**

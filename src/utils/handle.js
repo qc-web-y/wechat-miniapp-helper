@@ -7,6 +7,9 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
   const { wxml, wxss, json, js } = config
   let wxmlStr, wxssStr, jsonStr, jsStr
 
+  // 获取style设置
+  const style = vscode.workspace.getConfiguration('wechat-miniapp-create').get('Style')
+
   const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
   if (folder === undefined) folder = rootPath
 
@@ -46,7 +49,7 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     else wxmlStr = `<!--${newPath}.wxml-->\n<text>${newPath}.wxml</text>`
 
     if (wxss.fileName && wxss.gistID) wxssStr = await ajax(wxss.fileName, wxss.gistID)
-    else wxssStr = `/* ${newPath}.wxss */`
+    else wxssStr = `/* ${newPath}.${style} */`
 
     if (json.fileName && json.gistID) jsonStr = await ajax(json.fileName, json.gistID)
     else jsonStr = JSON_DEF
@@ -59,7 +62,7 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     mkdir(target, () => writeFileSync(wxmlTarFile, wxmlStr, 'utf-8'))
 
     // 写入wxss
-    const wxssTarFile = join(target, `/${input}.wxss`)
+    const wxssTarFile = join(target, `/${input}.${style}`)
     writeFileSync(wxssTarFile, wxssStr, 'utf-8')
 
     // 写入json
@@ -73,7 +76,6 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     if (type === 'PAGE') {
       // 添加路径到 app.json
       const file = join(rootPath, 'app.json')
-      console.log(file)
       if (!existsSync(file)) throw '根目录不存在app.json文件!'
       readFile(file, (err, data) => {
         if (err) return console.log(err)
@@ -83,7 +85,6 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
       })
     }
   } catch (err) {
-    console.log('err', err)
     vscode.window.showErrorMessage(err)
   }
 }

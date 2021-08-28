@@ -2,7 +2,7 @@
 
 ## Features
 
-- 目前只有一个功能，快速新建`page`和`component`文件结构，自动追加`page`路径到`app.json`
+- 目前只有一个功能，快速新建`page`和`component`文件结构，并自动追加`page`路径到`app.json`
 
 > 后续**也许**会添加其他功能
 
@@ -15,6 +15,15 @@
 > 如果通过命令使用该扩展，那么默认会在项目根目录创建文件夹
 
 ## Extension Settings
+
+### wechat-miniapp-create.Style
+
+根据设置生成不同的样式文件
+
+```json
+// 仅支持 wxss(default) | less | sass | scss
+"wechat-miniapp-create.Style": "scss",
+```
 
 ### wechat-miniapp-create.PageGist
 

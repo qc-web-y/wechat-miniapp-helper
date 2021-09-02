@@ -44,6 +44,18 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     // 判断是否已存在文件
     if (existsSync(target)) throw '目标文件已存在！'
 
+    // 新建page时判断是否存在app.json
+    if (type === 'PAGE') {
+      // 添加路径到 app.json
+      const file = join(rootPath, 'app.json')
+      if (!existsSync(file)) throw '根目录不存在app.json文件!'
+      readFile(file, (err, data) => {
+        const app = JSON.parse(data)
+        app.pages.unshift(newPath)
+        writeFileSync(file, JSON.stringify(app, null, '\t'))
+      })
+    }
+
     if (wxml.fileName && wxml.gistID) wxmlStr = await ajax(wxml.fileName, wxml.gistID)
     else wxmlStr = `<!--${newPath}.wxml-->\n<text>${newPath}.wxml</text>`
 
@@ -71,18 +83,6 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     // 写入js
     const jsTarFile = join(target, `/${input}.js`)
     writeFileSync(jsTarFile, jsStr, 'utf-8')
-
-    if (type === 'PAGE') {
-      // 添加路径到 app.json
-      const file = join(rootPath, 'app.json')
-      if (!existsSync(file)) throw '根目录不存在app.json文件!'
-      readFile(file, (err, data) => {
-        if (err) return console.log(err)
-        const app = JSON.parse(data)
-        app.pages.unshift(newPath)
-        writeFileSync(file, JSON.stringify(app, null, '\t'))
-      })
-    }
   } catch (err) {
     vscode.window.showErrorMessage(err)
   }

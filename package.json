@@ -2,7 +2,7 @@
   "name": "wechat-miniapp-helper",
   "displayName": "微信小程序助手",
   "description": "快速创建page和component文件结构",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "engines": {
     "vscode": "^1.59.0"
   },
@@ -47,6 +47,16 @@
           "command": "createComponent",
           "group": "1_navigation@2",
           "when": "explorerResourceIsFolder"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "createPage",
+          "when": "null"
+        },
+        {
+          "command": "createComponent",
+          "when": "null"
         }
       ]
     },

@@ -12,8 +12,6 @@
 
 ![Capture](https://raw.githubusercontent.com/whosydd/images-in-one/main/202108280127446.PNG)
 
-> 如果通过命令使用该扩展，那么默认会在项目根目录创建文件夹
-
 ## Extension Settings
 
 ### wechat-miniapp-create.Style
@@ -60,7 +58,6 @@
 
 配置同上
 
------------------------------------------------------------------------------------------------------------
+---
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-

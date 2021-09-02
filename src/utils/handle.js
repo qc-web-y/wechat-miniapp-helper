@@ -11,7 +11,6 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
   const style = vscode.workspace.getConfiguration('wechat-miniapp-create').get('Style')
 
   const rootPath = vscode.workspace.workspaceFolders[0].uri.fsPath
-  if (folder === undefined) folder = rootPath
 
   // 获取目标文件夹名称
   const input = await vscode.window.showInputBox({

@@ -2,7 +2,7 @@
   "name": "wechat-miniapp-helper",
   "displayName": "微信小程序助手",
   "description": "快速创建page和component文件结构",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "engines": {
     "vscode": "^1.59.0"
   },

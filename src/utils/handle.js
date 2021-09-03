@@ -48,8 +48,9 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     if (type === 'PAGE') {
       // 添加路径到 app.json
       const res = await vscode.workspace.findFiles('**/app.json')
+      if (res.length === 0) throw 'app.json 文件不存在!'
       const file = res[0].fsPath
-      if (!existsSync(file)) throw 'app.json 文件不存在!'
+      // if (!existsSync(file)) throw 'app.json 文件不存在!'
       readFile(file, (err, data) => {
         const app = JSON.parse(data)
         app.pages.push(newPath)

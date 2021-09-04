@@ -47,7 +47,7 @@ async function handle(folder, config, JSON_DEF, JS_DEF, type) {
     // 新建page时判断是否存在app.json
     if (type === 'PAGE') {
       // 添加路径到 app.json
-      const res = await vscode.workspace.findFiles('**/app.json')
+      const res = await vscode.workspace.findFiles('**/app.json', '**/node_modules/**')
       if (res.length === 0) throw 'app.json 文件不存在!'
       const file = res[0].fsPath
       // if (!existsSync(file)) throw 'app.json 文件不存在!'

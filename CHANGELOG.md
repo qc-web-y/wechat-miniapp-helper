@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.3]
+
+- 优化代码，查找`app.json`时，排除`node_modules`文件夹
+
 ## [0.2.2]
 
 - page 添加到`app.json`时，为了避免影响首页路径，改用 push 方法追加到末尾

@@ -2,7 +2,7 @@
   "name": "wechat-miniapp-helper",
   "displayName": "微信小程序助手",
   "description": "快速创建page和component文件结构",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "engines": {
     "vscode": "^1.59.0"
   },
@@ -29,11 +29,11 @@
     "commands": [
       {
         "command": "createPage",
-        "title": "WeChat：新建 Page"
+        "title": "%page%"
       },
       {
         "command": "createComponent",
-        "title": "WeChat：新建 Component"
+        "title": "%component%"
       }
     ],
     "menus": {

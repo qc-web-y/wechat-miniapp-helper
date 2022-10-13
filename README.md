@@ -1,9 +1,10 @@
 # 微信小程序助手
 
 - 该扩展为 `微信小程序助手的Fork -whosydd`, 如需原版请至 [wechat-miniapp-helper](https://marketplace.visualstudio.com/items?itemName=whosydd.wechat-miniapp-helper)
-- 快速创建及删除小程序页面 `page` 文件结构，并同步 `app.json` 中的对应页面路径
+- 快速创建小程序页面 `page` 文件结构，并同步 `app.json` 中的对应页面路径
 - 快速创建小程序页面 `component` 文件结构
 - 支持通过vscode配置修改文件结构扩展名以支持 `sass` `typescript` 及自定义模板
+- 当删除/重命名 `page` 文件时，可自动/手动进行 `app.json` 及对应子文件的同步
 
 ## Usage
 
@@ -11,16 +12,30 @@
 中文版：
 - `微信小程序: 新建页面`
 - `微信小程序: 新建组件`
-- `微信小程序: 删除页面`
 
 英文版
 - `WeChat: New Page`
 - `WeChat: New Component`
-- `WeChat: Del Page`
 
 ![Capture](https://raw.githubusercontent.com/whosydd/images-in-one/main/202108280127446.PNG)
 
 ## Extension Settings
+
+#### wechat-miniapp.sync.delete
+
+设置删除小程序页面时，是否自动同步 `app.json` `pages` 路径配置，默认为 `false`
+
+```json
+"wechat-miniapp.sync.delete": true,
+```
+
+#### wechat-miniapp.sync.rename
+
+设置重命名小程序页面时，是否自动同步 `app.json` `pages` 路径配置，及其子文件名，默认为 `false`
+
+```json
+"wechat-miniapp.sync.delete": true,
+```
 
 #### wechat-miniapp.ext.style
 

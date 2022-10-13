@@ -2,28 +2,22 @@
   "name": "wechat-miniapp-helper-fork",
   "displayName": "微信小程序助手-Y",
   "description": "快速创建/删除page和component文件结构",
-  "version": "0.2.5",
-  "engines": {
-    "vscode": "^1.59.0"
-  },
-  "categories": [
-    "Other"
-  ],
+  "version": "0.2.6",
+  "engines": {"vscode": "^1.59.0"},
+  "categories": ["Other"],
   "publisher": "yaner",
   "repository": {
     "type": "git",
     "url": "https://github.com/qc-web-y/wechat-miniapp-helper.git"
   },
   "license": "MIT",
-  "keywords": [
-    "wechat",
-    "miniapp"
-  ],
+  "keywords": ["wechat", "miniapp"],
   "icon": "src/static/wechat.png",
   "activationEvents": [
     "onCommand:createPage",
     "onCommand:createComponent",
-    "onCommand:deletePage"
+    "workspaceContains:project.config.json",
+    "workspaceContains:app.json"
   ],
   "main": "./src/extension.js",
   "contributes": {
@@ -35,10 +29,6 @@
       {
         "command": "createComponent",
         "title": "%component%"
-      },
-      {
-        "command": "deletePage",
-        "title": "%delPage%"
       }
     ],
     "menus": {
@@ -52,11 +42,6 @@
           "command": "createComponent",
           "group": "1_navigation@2",
           "when": "explorerResourceIsFolder"
-        },
-        {
-          "command": "deletePage",
-          "group": "1_navigation@3",
-          "when": "explorerResourceIsFolder"
         }
       ],
       "commandPalette": [
@@ -67,16 +52,12 @@
         {
           "command": "createComponent",
           "when": "null"
-        },
-        {
-          "command": "deletePage",
-          "when": "null"
         }
       ]
     },
     "configuration": [
       {
-        "title": "微信小程序助手",
+        "title": "微信小程序助手-Y",
         "properties": {
           "wechat-miniapp.gist.page": {
             "type": "object",
@@ -98,7 +79,7 @@
                 "gistID": ""
               }
             },
-            "description": "微信小程序新建Page时需使用的Gist远程模板配置"
+            "description": "新建Page时需使用的Gist远程模板配置"
           },
           "wechat-miniapp.gist.component": {
             "type": "object",
@@ -120,7 +101,7 @@
                 "gistID": ""
               }
             },
-            "description": "微信小程序新建Component时需使用的Gist远程模板配置"
+            "description": "新建Component时需使用的Gist远程模板配置"
           },
           "wechat-miniapp.ext.style": {
             "type": "string",
@@ -131,7 +112,7 @@
               "sass",
               "scss"
             ],
-            "description": "微信小程序新建页面或组件时样式扩展名"
+            "description": "新建页面或组件时样式扩展名"
           },
           "wechat-miniapp.ext.script": {
             "type": "string",
@@ -140,7 +121,17 @@
               "js",
               "ts"
             ],
-            "description": "微信小程序新建页面或组件时脚本扩展名"
+            "description": "新建页面或组件时脚本扩展名"
+          },
+          "wechat-miniapp.sync.delete": {
+            "type": "boolean",
+            "default": false,
+            "description": "删除页面时是否自动同步app.json文件"
+          },
+          "wechat-miniapp.sync.rename": {
+            "type": "boolean",
+            "default": false,
+            "description": "重命名页面时是否自动同步app.json文件"
           }
         }
       }

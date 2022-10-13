@@ -1,5 +1,5 @@
-const { readFile, writeFileSync, existsSync, mkdir, rmdir } = require('fs')
-const { join } = require('path')
+const { readFile, writeFileSync, existsSync, mkdir } = require('fs')
+const { join, extname, basename } = require('path')
 const vscode = require('vscode')
 const axios = require('axios')
 
@@ -114,35 +114,70 @@ async function handle(folder, JSON_DEF, JS_DEF, type) {
   }
 }
 
-async function handleDelete (folder) {
+async function change (event, type) {
+
   // 获取小程序文件Root路径
   const rootPath = vscode.workspace.rootPath
   const miniRoot = (await readWorkspaceFile('project.config.json')).data.miniprogramRoot
   const miniPath = join(rootPath, miniRoot)
 
-  // 获取该删除文件在app.json pages 中的路径
-  const filePath = join(folder.fsPath).replaceAll(miniPath, '').replaceAll('\\', '/')
-  const appPagePath = filePath + filePath.substr(filePath.lastIndexOf('/'), filePath.length + 1)
+  // 获取变化文件在app.json pages 中配置路径
+  const fsPath = type === 'delete' ? event.files[0].fsPath : event.files[0].oldUri.fsPath
+  const pageDir = join(fsPath).replaceAll(miniPath, '').replaceAll('\\', '/')
+  const pageName = basename(pageDir)
+  const pagePath = pageDir + '/' + pageName
 
-  // 检测该删除文件是否在 pp.json pages 中
+  // 检测变化文件是否在 app.json pages 中
   const appFile = await readWorkspaceFile('app.json')
-  const existFilePath = appFile.data.pages.some(s => s === appPagePath)
+  const existFilePath = appFile.data.pages.some(s => s === pagePath)
+  if(!existFilePath) return
 
-  if(existFilePath) {
-    vscode.window.showInformationMessage('确定要删除该文件吗？', '是', '否')
-      .then(result => {
-        if(result === '是') {
-          vscode.workspace.fs.delete(folder, {recursive: true})
-          appFile.data.pages = appFile.data.pages.filter(s => s !== appPagePath)
-          writeFileSync(appFile.path, JSON.stringify(appFile.data, null, '\t'))
-        }
-      })
-  } else {
-    vscode.window.showErrorMessage('该文件并不在 app.json 中！')
+  // 同步删除文件至 app.json pages 中
+  function syncDeleteFile () {
+    appFile.data.pages = appFile.data.pages.filter(s => s !== pagePath)
+    writeFileSync(appFile.path, JSON.stringify(appFile.data, null, '\t'))
   }
+
+  // 同步重命名文件修改
+  function syncRenameFile () {
+    const newUri = event.files[0].newUri
+    const newPageDir = join(newUri.fsPath).replaceAll(miniPath, '').replaceAll('\\', '/')
+    const newPageName = basename(newPageDir)
+    const newPagePath = newPageDir + '/' + newPageName
+
+    // 同步 app.json
+    appFile.data.pages = appFile.data.pages.map(s => (s === pagePath) ? newPagePath : s)
+    writeFileSync(appFile.path, JSON.stringify(appFile.data, null, '\t'))
+
+    // 重命名其子文件名
+    vscode.workspace.fs.readDirectory(newUri).then(childs => {
+      childs.forEach(s => {
+        const sourceUri = vscode.Uri.file(join(newUri.fsPath, s[0]))
+        const targetUri = vscode.Uri.file(join(newUri.fsPath, newPageName + extname(s[0])))
+        vscode.workspace.fs.rename(sourceUri, targetUri, {overwrite: true})
+      })
+    })
+  }
+
+  // 用户开启自动同步配置后执行
+  const isAutoSync =  vscode.workspace.getConfiguration('wechat-miniapp').get(`sync.${type}`)
+  if(isAutoSync) {
+    if (type === 'delete') syncDeleteFile()
+    if (type === 'rename') syncRenameFile()
+    return
+  }
+
+  // 用户未开启自动同步需询问
+  let msgType = (type === 'delete') ? '删除' : '重命名'
+  vscode.window.showInformationMessage(`检测到${msgType}文件为小程序页面，是否同步至app.json？`, '是', '否')
+    .then(result => {
+      if(result === '否') return
+      if (type === 'delete') syncDeleteFile()
+      if (type === 'rename') syncRenameFile()
+    })
 }
 
 module.exports = {
   handle,
-  handleDelete
+  change
 }

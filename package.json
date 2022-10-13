@@ -22,7 +22,8 @@
   "icon": "src/static/wechat.png",
   "activationEvents": [
     "onCommand:createPage",
-    "onCommand:createComponent"
+    "onCommand:createComponent",
+    "onCommand:deletePage"
   ],
   "main": "./src/extension.js",
   "contributes": {
@@ -34,6 +35,10 @@
       {
         "command": "createComponent",
         "title": "%component%"
+      },
+      {
+        "command": "deletePage",
+        "title": "%delPage%"
       }
     ],
     "menus": {
@@ -47,6 +52,11 @@
           "command": "createComponent",
           "group": "1_navigation@2",
           "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "deletePage",
+          "group": "1_navigation@3",
+          "when": "explorerResourceIsFolder"
         }
       ],
       "commandPalette": [
@@ -57,14 +67,18 @@
         {
           "command": "createComponent",
           "when": "null"
+        },
+        {
+          "command": "deletePage",
+          "when": "null"
         }
       ]
     },
     "configuration": [
       {
-        "title": "useGist",
+        "title": "微信小程序助手",
         "properties": {
-          "wechat-miniapp-create.PageGist": {
+          "wechat-miniapp.gist.page": {
             "type": "object",
             "default": {
               "wxml": {
@@ -83,9 +97,10 @@
                 "fileName": "",
                 "gistID": ""
               }
-            }
+            },
+            "description": "微信小程序新建Page时需使用的Gist远程模板配置"
           },
-          "wechat-miniapp-create.ComponentGist": {
+          "wechat-miniapp.gist.component": {
             "type": "object",
             "default": {
               "wxml": {
@@ -104,9 +119,10 @@
                 "fileName": "",
                 "gistID": ""
               }
-            }
+            },
+            "description": "微信小程序新建Component时需使用的Gist远程模板配置"
           },
-          "wechat-miniapp-create.Style": {
+          "wechat-miniapp.ext.style": {
             "type": "string",
             "default": "wxss",
             "enum": [
@@ -114,7 +130,17 @@
               "less",
               "sass",
               "scss"
-            ]
+            ],
+            "description": "微信小程序新建页面或组件时样式扩展名"
+          },
+          "wechat-miniapp.ext.script": {
+            "type": "string",
+            "default": "js",
+            "enum": [
+              "js",
+              "ts"
+            ],
+            "description": "微信小程序新建页面或组件时脚本扩展名"
           }
         }
       }

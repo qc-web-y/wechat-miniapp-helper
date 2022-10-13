@@ -1,4 +1,5 @@
 {
   "page": "WeChat: New Page",
-  "component": "WeChat: New Component"
+  "component": "WeChat: New Component",
+  "delPage": "WeChat: Del Page"
 }

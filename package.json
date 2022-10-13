@@ -1,5 +1,5 @@
 {
-  "name": "wechat-miniapp-helper",
+  "name": "wechat-miniapp-helper-fork",
   "displayName": "微信小程序助手-Y",
   "description": "快速创建/删除page和component文件结构",
   "version": "0.2.5",
@@ -12,7 +12,7 @@
   "publisher": "yaner",
   "repository": {
     "type": "git",
-    "url": "https://github.com/whosydd/wechat-miniapp-helper.git"
+    "url": "https://github.com/qc-web-y/wechat-miniapp-helper.git"
   },
   "license": "MIT",
   "keywords": [

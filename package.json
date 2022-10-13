@@ -1,15 +1,15 @@
 {
   "name": "wechat-miniapp-helper",
-  "displayName": "微信小程序助手",
-  "description": "快速创建page和component文件结构",
-  "version": "0.2.4",
+  "displayName": "微信小程序助手-Y",
+  "description": "快速创建/删除page和component文件结构",
+  "version": "0.2.5",
   "engines": {
     "vscode": "^1.59.0"
   },
   "categories": [
     "Other"
   ],
-  "publisher": "whosydd",
+  "publisher": "yaner",
   "repository": {
     "type": "git",
     "url": "https://github.com/whosydd/wechat-miniapp-helper.git"

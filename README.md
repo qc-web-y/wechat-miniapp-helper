@@ -1,29 +1,44 @@
 # 微信小程序助手
 
-## Features
-
-- 目前只有一个功能，快速新建`page`和`component`文件结构，并自动追加`page`路径到`app.json`
-
-> 后续**也许**会添加其他功能
+- 该扩展为 `微信小程序助手的Fork -whosydd`, 如需原版请至 [wechat-miniapp-helper](https://marketplace.visualstudio.com/items?itemName=whosydd.wechat-miniapp-helper)
+- 快速创建及删除小程序页面 `page` 文件结构，并同步 `app.json` 中的对应页面路径
+- 快速创建小程序页面 `component` 文件结构
+- 支持通过vscode配置修改文件结构扩展名以支持 `sass` `typescript` 及自定义模板
 
 ## Usage
 
-右键点击**文件夹**或者**空白处**才会出现`WeChat: 新建 Page`和`WeChat: 新建 Component`选项
+右键点击**文件夹**或者**空白处**可在右键菜单中显示
+中文版：
+- `微信小程序: 新建页面`
+- `微信小程序: 新建组件`
+- `微信小程序: 删除页面`
+
+英文版
+- `WeChat: New Page`
+- `WeChat: New Component`
+- `WeChat: Del Page`
 
 ![Capture](https://raw.githubusercontent.com/whosydd/images-in-one/main/202108280127446.PNG)
 
 ## Extension Settings
 
-### wechat-miniapp-create.Style
+#### wechat-miniapp.ext.style
 
-根据设置生成不同的样式文件
+设置小程序页面 `wxss` 样式文件的扩展名，当前仅支持 `wxss(default) | less | sass | scss`
 
 ```json
-// 仅支持 wxss(default) | less | sass | scss
-"wechat-miniapp-create.Style": "scss",
+"wechat-miniapp.ext.style": "scss",
 ```
 
-### wechat-miniapp-create.PageGist
+#### wechat-miniapp.ext.script
+
+设置小程序页面 `js` 脚本文件的扩展名，当前仅支持 `js(default) | ts`
+
+```json
+"wechat-miniapp.ext.script": "ts",
+```
+
+#### wechat-miniapp.gist.page
 
 在`settings`添加该配置后，可以通过在[Gist](https://gist.github.com/)上添加自定义的文件模板，通过`ajax`获取到本地
 
@@ -34,7 +49,7 @@
 > https://gist.github.com/whosydd/037f52d91c0dcd5a8d81d68c2fb3c754 <-- 后面这一长串数字就是`gistID`
 
 ```json
-"wechat-miniapp-create.PageGist": {
+"wechat-miniapp.gist.page": {
     "wxml": {
       "fileName": "test.wxml",
       "gistID": "79f6deafa782a06739d96a01b047479a"
@@ -54,7 +69,7 @@
   },
 ```
 
-### wechat-miniapp-create.ComponentGist
+### wechat-miniapp.gist.component
 
 配置同上
 
